@@ -62,15 +62,8 @@ def Alteraciones(tam_chunk,recorrido,dataframe):
                     ListaChunks[lst_ch].append(variante) #Se agrega la variante al chunk del que es perteneciente
         else:
             continue #Si no tiene mas de una variante, se continua con el siguiente chunk
+    return ListaChunks #Se retorna la lista de chunks con sus variantes
 
-    #print(filas)
-    #print(Lst_Com)
-    #print(VariantesCadena)
-    # 
-    #print(Combinacion_total(ListaChunks, cadena))
-        print(Combinacion_rango(ListaChunks, cadena, 0, 2))
-    print(len(Combinacion_total(ListaChunks, cadena)))
-    input()
 
 def Combinacion_total(ListaChunks, cadena):
     Variantes = [] #Lista de variantes de la cadena
@@ -86,11 +79,14 @@ def Combinacion_total(ListaChunks, cadena):
 def Combinacion_rango(ListaChunks, cadena, rango_inicio, rango_fin):
     Variantes = [] #Lista de variantes de la cadena
     Variantes.append(cadena) #Se agrega la cadena original a la lista de variantes
-    for chunk in range(ListaChunks[rango_inicio:rango_fin]): #Bucle para recorrer cada una de las listas de chunks
-        for variante in ListaChunks[chunk]: #Bucle para recorrer cada una de las variantes en el chunk actual
+    Sublista=ListaChunks[rango_inicio:rango_fin] #Se obtiene la sublista de chunks
+    if rango_inicio == rango_fin:
+        Sublista = [ListaChunks[rango_inicio]]
+    for chunk in Sublista: #Bucle para recorrer cada una de las listas de chunks
+        for variante in chunk: #Bucle para recorrer cada una de las variantes en el chunk actual
             if variante not in Variantes and variante != cadena: #Si la variante no esta en la lista de variantes y es diferente a la cadena original
                 Variantes.append(variante) #Se agrega la variante a la lista de variantes
     Combinaciones = Combinacion_cadenas(Variantes) #Se obtiene la combinacion de las variantes
     return Combinaciones #Se retorna el conjunto de combinaciones
 
-Leercsv()
+#Leercsv()
